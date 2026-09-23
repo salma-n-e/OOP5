@@ -39,6 +39,15 @@
             // It takes no access modifiers or parameters and executes only once per application run.
             // d) A static class is a class that contains only static members and cannot be instantiated.
             // No, you cannot create an object from a static class (using the new keyword is prohibited).
+
+            // Q 4
+            // a) An extension method is a special kind of static method that enables you to "add"
+            // new methods to existing types (like string, int, or custom classes) without modifying
+            // the original code, inheriting from it, or recompiling it. 
+            // b) The this keyword must precede the first parameter.
+            // c) It must be declared inside a non-generic static class.
+            // d) No, an extension method cannot access private or protected
+            // members of the extended class. It can only access its public members.
         }
     }
 }
