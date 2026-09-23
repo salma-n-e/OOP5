@@ -13,6 +13,7 @@
             // No new object is created on the Heap.
             // Copying an Object: Allocates memory on the Heap and creates a new object containing duplicate values
             // from the original object.
+
             // Q 2
             // a) A Shallow Copy creates a new object, but copies only the top-level fields.
             // Primitive values are copied by value, while reference-type fields are copied as references 
@@ -24,6 +25,20 @@
             // copying their internal values so no references are shared.
             // e)  When an object contains nested complex structures ,
             // and you want to modify the cloned order's item details without affecting the original order's data.
+
+            // Q 3 
+            // a) A static field belongs to the Class itself and is shared across all instances (objects) in a single memory location.
+            // An instance field belongs to a specific Object and each created object has its own separate copy of that field. 
+            // b) A static method belongs to the class and can be called directly using the class name without
+            // creating an instance.
+            // No, a static method cannot directly access instance members (fields or methods)
+            // because instance members require a specific object reference (this), which does not exist in a static
+            // context.
+            // c) A static constructor is used to initialize static data or perform actions required only once.
+            // It is executed automatically before the first instance is created or any static members are referenced.
+            // It takes no access modifiers or parameters and executes only once per application run.
+            // d) A static class is a class that contains only static members and cannot be instantiated.
+            // No, you cannot create an object from a static class (using the new keyword is prohibited).
         }
     }
 }
