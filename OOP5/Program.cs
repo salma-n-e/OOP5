@@ -1,4 +1,6 @@
-﻿namespace OOP5
+﻿using System.ComponentModel.Design;
+
+namespace OOP5
 {
     internal class Program
     {
@@ -48,6 +50,18 @@
             // c) It must be declared inside a non-generic static class.
             // d) No, an extension method cannot access private or protected
             // members of the extended class. It can only access its public members.
+
+            // Q 5
+            // a) A Partial Class allows the definition/implementation of a single class
+            // to be split across multiple physical .cs files using the partial keyword.
+            // When compiled, all parts are combined into one single class.
+            // b) To allow multiple developers to work on different parts of the same class simultaneously without merge conflicts.
+            // To separate auto - generated code(like UI designers or database entities) from custom user code.
+            //To organize large classes into cleaner, more manageable files based on features.
+            // c) A Partial Method is a method declared in one part of a partial class and optionally implemented in another
+            // part of the same partial class. It must return void and cannot have access modifiers (implicitly private).
+            // d) The C# compiler completely removes the method declaration and all calls to it during compilation.
+            // There is no performance penalty or runtime overhead.
         }
     }
 }
