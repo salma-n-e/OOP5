@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.Design;
+﻿using OOP04;
+using System.ComponentModel.Design;
 
 namespace OOP5
 {
@@ -62,6 +63,141 @@ namespace OOP5
             // part of the same partial class. It must return void and cannot have access modifiers (implicitly private).
             // d) The C# compiler completely removes the method declaration and all calls to it during compilation.
             // There is no performance penalty or runtime overhead.
+
+
+
+            DeliveryUtilities.PrintSystemTitle("Smart Delivery Management System");
+
+
+
+            Console.WriteLine($"[Check] Initial Shipments Count: {Shipment.GetTotalShipmentsCreated()}");
+
+
+            ExpressDelivery shipment1 = new ExpressDelivery("SH001", "Laptop", 2.5, 50, new DeliveryAddress("Cairo", "Tahrir St", 10));
+
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine(" Reference Assignment ");
+            Shipment shipment2 = shipment1;
+
+
+            Console.WriteLine($"shipment1 Tracking Code: {shipment1.TrackingCode}");
+            Console.WriteLine($"shipment2 Tracking Code: {shipment2.TrackingCode}");
+            Console.WriteLine($"Are shipment1 and shipment2 reference equal? {object.ReferenceEquals(shipment1, shipment2)}");
+
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine(" Shallow Copy Demonstration ");
+            Shipment shallowCopy = shipment1.ShallowCopy();
+
+
+            Console.WriteLine($"Original Address City Before Change: {shipment1.Destination.City}");
+            shallowCopy.Destination.City = "Giza";
+            Console.WriteLine($"Original Address City After Changing Copy: {shipment1.Destination.City}");
+            Console.WriteLine($"Same DeliveryAddress object? {object.ReferenceEquals(shipment1.Destination, shallowCopy.Destination)}");
+
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine(" Deep Copy Demonstration ");
+            Shipment deepCopy = shipment1.DeepCopy();
+
+
+            Console.WriteLine($"Original Address City Before Change: {shipment1.Destination.City}");
+            deepCopy.Destination.City = "Alexandria";
+            Console.WriteLine($"Original Address City After Changing Copy: {shipment1.Destination.City}");
+            Console.WriteLine($"Copied Address City: {deepCopy.Destination.City}");
+            Console.WriteLine($"Same DeliveryAddress object? {object.ReferenceEquals(shipment1.Destination, deepCopy.Destination)}");
+
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine(" Static Shipment Counter ");
+            Console.WriteLine($"Total Shipments Created So Far: {Shipment.GetTotalShipmentsCreated()}");
+
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine(" Extension Methods Demonstration ");
+
+
+            Console.WriteLine($"Shipment Summary: {shipment1.GetSummary()}");
+
+
+            Console.WriteLine($"Is Shipment Delivered? {shipment1.IsDelivered()}");
+
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine(" Partial Method & Status Updates ");
+
+
+            shipment1.UpdateTrackingStatus("Out For Delivery");
+            shipment1.UpdateTrackingStatus("Delivered");
+
+            Console.WriteLine($"Is Shipment Delivered Now? {shipment1.IsDelivered()}");
+            Console.WriteLine($"Updated Summary: {shipment1.GetSummary()}");
+
+            DeliveryUtilities.PrintSeparator();
+            Console.WriteLine("All Checklists Completed Successfully!");
+            DeliveryUtilities.PrintSeparator();
+
+
+            DeliveryAddress addr1 = new DeliveryAddress("Cairo", "Street 10", 5);
+            DeliveryAddress addr2 = new DeliveryAddress("Giza", "Street 5", 89);
+            DeliveryAddress addr3 = new DeliveryAddress("Alexandria", "Street 20", 90);
+
+
+            StandardShipment std = new StandardShipment("SH001", "Books", 2.5, 50m, addr1);
+
+
+            ExpressShipment exp = new ExpressShipment("SH002", "Electronics", 1.2, 100m, addr2, 25m);
+
+
+            InternationalShipment inter = new InternationalShipment("SH003", "Documents", 0.5, 200m, addr3, "Germany", 30m);
+
+
+            DeliveryCenter center = new DeliveryCenter("Main Hub", 10);
+            center.AddShipment(std);
+            center.AddShipment(exp);
+            center.AddShipment(inter);
+
+
+            Console.WriteLine("========================================");
+            Console.WriteLine("  All Shipment Details ");
+            Console.WriteLine("========================================");
+            center.PrintAllShipments();
+
+
+            Console.WriteLine("========================================");
+            Console.WriteLine("  Tracking Statuses via DeliveryCenter ");
+            Console.WriteLine("========================================");
+            center.PrintTrackingStatuses();
+
+
+            Console.WriteLine("========================================");
+            Console.WriteLine("  Insurance Costs via DeliveryReport ");
+            Console.WriteLine("========================================");
+            DeliveryReport.PrintInsurance(std);
+            DeliveryReport.PrintInsurance(exp);
+            DeliveryReport.PrintInsurance(inter);
+
+
+            Console.WriteLine("========================================");
+            Console.WriteLine("  Polymorphism via ITrackable Array ");
+            Console.WriteLine("========================================");
+            ITrackable[] trackables = new ITrackable[] { std, exp, inter };
+            foreach (ITrackable item in trackables)
+            {
+                DeliveryReport.PrintShipment(item);
+            }
+
+
+            Console.WriteLine("========================================");
+            Console.WriteLine("  Polymorphism via IInsurable Array ");
+            Console.WriteLine("========================================");
+            IInsurable[] insurables = new IInsurable[] { std, exp, inter };
+            foreach (IInsurable item in insurables)
+            {
+                DeliveryReport.PrintInsurance(item);
+
+            }
         }
     }
 }
